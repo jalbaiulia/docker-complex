@@ -1,0 +1,36 @@
+{
+	"AWSEBDockerrunVersion": 2,
+	"containerDefinitions": [
+		{
+			"name": "client",
+			"image": "portocalaverde/multi-client",
+			"hostname": "client",
+			"essential": false 
+		},
+		{
+			"name": "server",
+			"image": "portocalaverde/multi-server",
+			"hostname": "api",
+			"essential": false
+		},
+		{
+			"name": "worker",
+			"image": "portocalaverde/multi-worker",
+			"hostname": "worker",
+			"essential": false
+		},
+		{
+			"name": "nginx",
+			"image": "portocalaverde/multi-nginx",
+			"hostname": "nginx",
+			"essential": true,
+			"portMappings": [
+				{
+					"hostPort": 80,
+					"containerPort": 80	
+				}
+			],
+			"links": ["client", "server"]
+		}
+	]
+}
